@@ -7,8 +7,7 @@ const getAll = async () => {
     return tasks;
 }
 
-const createTask = async (task) => {
-    const { title } = task;
+const createTask = async (title) => {
     const dateUTC = new Date(Date.now()).toUTCString();
 
     const query = 'INSERT INTO tasks (title, status, created_task) VALUES (?, ?, ?)';
@@ -24,9 +23,7 @@ const deleteTask = async (id) => {
     return removedTask;
 }
 
-const updateTask = async (id, task) => {
-    const { title, status } = task;
-
+const updateTask = async (id, title, status) => {
     const query = 'UPDATE tasks SET title = ?, status = ? WHERE id = ?';
 
     const [updatedTask] = await connection.execute(query, [title, status, id]);

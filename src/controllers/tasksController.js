@@ -1,24 +1,22 @@
-const tasksModel = require('../models/tasksModel');
+const tasksService = require('../services/tasksService');
 
 const getAll = async (_req, res) => {
-    const tasks = await tasksModel.getAll();
+    const tasks = await tasksService.getAll();
     return res.status(200).json(tasks);
 }
 
 const createTask = async (req, res) => {
-    const createTask = await tasksModel.createTask(req.body);
+    const createTask = await tasksService.createTask(req);
     return res.status(201).json(createTask);
 }
 
 const deleteTask = async (req, res) => {
-    const { id } = req.params;
-    await tasksModel.deleteTask(id);
+    await tasksService.deleteTask(req);
     return res.status(204).json();
 }
 
 const updateTask = async (req, res) => {
-    const { id } = req.params;
-    await tasksModel.updateTask(id, req.body);
+    await tasksService.updateTask(req);
     return res.status(204).json();
 }
 
